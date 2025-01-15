@@ -79,19 +79,23 @@ awk '!seen[$1, $4, $5]++' merged.gtf > merged_without_duplicates.gtf
 ```bash
 awk '/^>/{p=($0!="chrM MT")} p' human_genome/GRCh38.p14.genome.fa > human_genome/GRCh38.p14.genome_no_chrM.fa
 ```
+### Step 10: Extract lncRNA from genome
+```bash
+gffread -w filtered_lncRNAs.fa -g human_genome/GRCh38.p14.genome_no_chrM.fa merged_without_duplicates.gtf
+```
 
-### Step 10: Assess Coding Potential
+### Step 11: Assess Coding Potential
 Download pre-built models and run:
 ```bash
 cpat.py -g filtered_lncRNAs.fa -x Human_Hexamer.tsv -d Human_logitModel.RData -o cpat_output.txt
 ```
 
-### Step 11: Quantify Transcript Abundance
+### Step 12: Quantify Transcript Abundance
 ```bash
 featureCounts -a merged_without_duplicates.gtf -o SRR24709142_counts.txt -T 8 -p -B -C SRR24709142_Aligned.sortedByCoord.out.bam
 ```
 
-### Step 12: Process Count Files
+### Step 13: Process Count Files
 Extract and combine processed data:
 ```bash
 for file in *_counts.txt; do
@@ -104,16 +108,16 @@ for file in processed_*_counts.txt; do
 done
 ```
 
-### Step 13: Differential Expression Analysis
+### Step 14: Differential Expression Analysis
 Use R with DESeq2 for differential expression analysis and visualization.
 
-### Step 14: Functional Annotation
+### Step 15: Functional Annotation
 ```bash
 FEELnc_filter.pl -i filtered_gencode.gtf -a gencode.v47.annotation.gtf -b transcript_biotype=protein_coding -l > candidate_lncRNA.gtf
 awk 'BEGIN{FS="\t"; OFS="\t"} {match($9, /gene_id \"([^\"]+)\"/, a); if (a[1] != "") print a[1]}' candidate_lncRNA.gtf | sort | uniq > lncRNA_target_genes.txt
 ```
 
-### Step 15: Pathway Enrichment Analysis
+### Step 16: Pathway Enrichment Analysis
 Use `clusterProfiler` in R for pathway enrichment analysis.
 
 ---
