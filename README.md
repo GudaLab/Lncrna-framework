@@ -100,11 +100,11 @@ This command filters the 4th column (coding potential score) and extracts only t
 ```bash
 awk '{print $1}' high_confidence_lncRNAs.txt > high_confidence_transcripts.txt
 ```
-#Step 13_a: Cross-reference the filtered transcripts with the GTF file
+### Step 13_a: Cross-reference the filtered transcripts with the GTF file
 ```bash
 grep -Ff high_confidence_transcripts.txt merged_without_duplicates.gtf > updated_filtered_gencode.gtf
 ```
-#Step 13_b: Verify the updated GTF file (optional)
+### Step 13_b: Verify the updated GTF file (optional)
 ```bash
 head updated_filtered_gencode.gtf
 ```
