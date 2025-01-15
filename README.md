@@ -89,6 +89,12 @@ Download pre-built models and run:
 ```bash
 cpat.py -g filtered_lncRNAs.fa -x Human_Hexamer.tsv -d Human_logitModel.RData -o cpat_output.txt
 ```
+### Step 12: Cross-referencing with GTF file (filtered_gencode.gtf) to update annotations
+The output file (cpat_output.txt) is filtered to retain only transcripts with low coding potential scores (i.e., non-coding). A typical threshold for non-coding classification is applied (e.g., coding potential score < 0.38 for human lncRNAs).
+```bash
+awk '$4 < 0.38' cpat_output.txt > high_confidence_lncRNAs.txt
+```
+This command filters the 4th column (coding potential score) and extracts only those classified as non-coding. The high-confidence lncRNAs are cross-referenced with GTF files (e.g., filtered_gencode.gtf) to update annotations, ensuring they align with transcript IDs of interest. The high-confidence lncRNAs identified in high_confidence_lncRNAs.txt are used as input for functional annotation (e.g., with FEELnc_filter.pl) to classify lncRNAs into various functional categories (e.g., intergenic or antisense).
 
 ### Step 12: Quantify Transcript Abundance
 ```bash
