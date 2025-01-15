@@ -79,7 +79,7 @@ awk '!seen[$1, $4, $5]++' merged.gtf > merged_without_duplicates.gtf
 ```bash
 awk '/^>/{p=($0!="chrM MT")} p' human_genome/GRCh38.p14.genome.fa > human_genome/GRCh38.p14.genome_no_chrM.fa
 ```
-### Step 10: Extract lncRNA from genome
+### Step 10: Extract lncRNA sequences from genome fasta
 ```bash
 gffread -w filtered_lncRNAs.fa -g human_genome/GRCh38.p14.genome_no_chrM.fa merged_without_duplicates.gtf
 ```
