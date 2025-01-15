@@ -1,9 +1,8 @@
 # lncRNA Analysis Pipeline
-LncRNA framework for identification of lncRNA dysregulations.
+LncRNA framework for identification of lncRNA dysregulations from RNAseq data.
 
 ## Overview
-LncRNA framework pipeline facilitates comprehensive lncRNA analysis, including preprocessing, alignment, transcript quantification, differential expression analysis, and functional annotation. The tools and steps outlined in this document ensure accurate and reproducible results. The below steps are for processing a single sample. Please see the scripts folder for batch processing.
-
+The lncRNA framework pipeline provides a comprehensive solution for lncRNA analysis, encompassing preprocessing, alignment, transcript quantification, differential expression analysis, and functional annotation. This document outlines the steps for processing a single sample. For batch processing, refer to the scripts folder.
 ---
 
 ## Prerequisites
