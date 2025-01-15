@@ -97,11 +97,17 @@ awk '$4 < 0.38' cpat_output.txt > high_confidence_lncRNAs.txt
 This command filters the 4th column (coding potential score) and extracts only those classified as non-coding. The high-confidence lncRNAs are cross-referenced with GTF files (e.g., filtered_gencode.gtf) to update annotations, ensuring they align with transcript IDs of interest. The high-confidence lncRNAs identified in high_confidence_lncRNAs.txt are used as input for functional annotation (e.g., with FEELnc_filter.pl) to classify lncRNAs into various functional categories (e.g., intergenic or antisense).
 
 ### Step 13: Extract transcript IDs from the filtered CPAT output
+```bash
 awk '{print $1}' high_confidence_lncRNAs.txt > high_confidence_transcripts.txt
+```
 #Step 13_a: Cross-reference the filtered transcripts with the GTF file
+```bash
 grep -Ff high_confidence_transcripts.txt merged_without_duplicates.gtf > updated_filtered_gencode.gtf
+```
 #Step 13_b: Verify the updated GTF file (optional)
+```bash
 head updated_filtered_gencode.gtf
+```
 
 ### Step 14: Quantify Transcript Abundance
 ```bash
