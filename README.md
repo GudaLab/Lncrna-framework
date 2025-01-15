@@ -96,12 +96,12 @@ awk '$4 < 0.38' cpat_output.txt > high_confidence_lncRNAs.txt
 ```
 This command filters the 4th column (coding potential score) and extracts only those classified as non-coding. The high-confidence lncRNAs are cross-referenced with GTF files (e.g., filtered_gencode.gtf) to update annotations, ensuring they align with transcript IDs of interest. The high-confidence lncRNAs identified in high_confidence_lncRNAs.txt are used as input for functional annotation (e.g., with FEELnc_filter.pl) to classify lncRNAs into various functional categories (e.g., intergenic or antisense).
 
-### Step 12: Quantify Transcript Abundance
+### Step 13: Quantify Transcript Abundance
 ```bash
 featureCounts -a merged_without_duplicates.gtf -o SRR24709142_counts.txt -T 8 -p -B -C SRR24709142_Aligned.sortedByCoord.out.bam
 ```
 
-### Step 13: Process Count Files
+### Step 14: Process Count Files
 Extract and combine processed data:
 ```bash
 for file in *_counts.txt; do
@@ -114,16 +114,16 @@ for file in processed_*_counts.txt; do
 done
 ```
 
-### Step 14: Differential Expression Analysis
+### Step 15: Differential Expression Analysis
 Use R with DESeq2 for differential expression analysis and visualization.
 
-### Step 15: Functional Annotation
+### Step 16: Functional Annotation
 ```bash
 FEELnc_filter.pl -i filtered_gencode.gtf -a gencode.v47.annotation.gtf -b transcript_biotype=protein_coding -l > candidate_lncRNA.gtf
 awk 'BEGIN{FS="\t"; OFS="\t"} {match($9, /gene_id \"([^\"]+)\"/, a); if (a[1] != "") print a[1]}' candidate_lncRNA.gtf | sort | uniq > lncRNA_target_genes.txt
 ```
 
-### Step 16: Pathway Enrichment Analysis
+### Step 17: Pathway Enrichment Analysis
 Use `clusterProfiler` in R for pathway enrichment analysis.
 
 ---
