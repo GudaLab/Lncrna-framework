@@ -71,7 +71,9 @@ cufflinks -g human_genome/gencode.v47.long_noncoding_RNAs.gtf -o SRR24709142_cuf
 Create a `mergelist.txt` file with paths to all `transcripts.gtf` files.
 
 ### Step 7a: Merge GTF
+```bash
 cat $(<mergelist.txt) > merged.gtf
+```
 
 ### Step 8: Merge Transcripts
 ### Step 8a: Remove duplicate coordinate-based entries
@@ -79,8 +81,9 @@ cat $(<mergelist.txt) > merged.gtf
 awk '!seen[$1, $4, $5]++' merged.gtf > merged_without_duplicates.gtf
 ```
 ### Step 8b: Remove duplicate transcript ID-based entries
+```bash
 python Remove_Duplicate_transcript_ID.py merged_without_duplicates.gtf output_merged_without_duplicates.gtf
-
+```
 ### Step 9: Remove Mitochondrial Chromosome
 ```bash
 awk '/^>/{p=($0!="chrM MT")} p' human_genome/GRCh38.p14.genome.fa > human_genome/GRCh38.p14.genome_no_chrM.fa
