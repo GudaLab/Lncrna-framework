@@ -49,7 +49,7 @@ fastqc SRR24709142_1.fastq.gz SRR24709142_2.fastq.gz -o qc_results
 
 ### Step 3: Trimming and Filtering
 ```bash
-fastp -i SRR24709142_1.fastq.gz -I SRR24709142_2.fastq.gz -o SRR24709142_1_clean.fastq.gz -O SRR24709142_2_clean.fastq.gz -h SRR24709142_report.html --trim_poly_g --cut_mean_quality 20 --length_required 50
+fastp -i SRR24709142_1.fastq.gz -I SRR24709142_2.fastq.gz -o SRR24709142_1_clean.fastq.gz -O SRR24709142_2_clean.fastq.gz -h SRR24709142_report.html --trim_poly_g --cut_tail --cut_mean_quality 20 --length_required 50
 ```
 
 ### Step 4: Generate STAR Index
